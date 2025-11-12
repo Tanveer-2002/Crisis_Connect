@@ -106,12 +106,6 @@ include '../dbConnect.php';
 
     <!-- Right Sidebar -->
     <aside class="sidebar">
-
-      <!-- Weather -->
-      <div class="sidebar-section">
-        <h2>Today's weather</h2>
-        <p>Rainy, 33 ℃</p>
-      </div>
       
       <div class="help-post" onclick="window.location.href = 'addDisaster.php'">
         <h3>Add new Disaster</h3>
@@ -140,6 +134,42 @@ include '../dbConnect.php';
 
       </div>
 
+      <div class="sidebar-section">
+        <h2>Donation requests</h2>
+        <div class ="scrollable">
+          <?php
+            $sql_query = "SELECT donation_id, amount, TrxID FROM donations WHERE is_varified = FALSE";
+            $result = mysqli_query($connect,$sql_query);
+          ?>
+          <div class="scrollable tasks-scroll">
+            <?php
+            if( mysqli_num_rows($result)>0):?>
+            <table style="border-collapse: collapse;width: 100%;">
+              <tr style=" border-bottom: 1px solid #000;">
+                <th style="width: 40%;">Amount</th>
+                <th style="width: 40%;">TrxID</th>
+                <th style="width: 20%;"></th>
+              </tr>
+              <?php while($row = $result->fetch_assoc()): ?>
+              <tr>
+                <td class="task-item"><?= htmlspecialchars($row['amount'])?></td>
+                <td class="task-item"><?= htmlspecialchars($row['TrxID'])?></td>
+                <td>
+                  <form action="verifyDonation.php" method="post">
+                    <input type="hidden" name="donation_id" value="<?= htmlspecialchars($row['donation_id'])?>">
+                    <button type="submit" class="addMem" name="submit" style="padding: 0px; width:80%; height:40px; margin: 5px">Pending</button>
+                  </form>
+                </td>
+              </tr>
+              <?php endwhile; ?>
+            </table>
+            <?php else:?>
+              <div>No requests Avaiable</div>
+            <?php endif;?>
+          </div>
+        </div>
+
+      </div>
 
     </aside>
 

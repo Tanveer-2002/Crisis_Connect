@@ -86,9 +86,30 @@ session_start()
 
         <!-- Right Column -->
         <section class="right-column">
-            <div class="weather">
-                <h3>Today's weather</h3>
-                <p>Rainy, 33 °C</p>
+            <?php
+            $apiKey = "353a1ad951d150708edf841ee1b4a8ce";
+            $city = "Dhaka";
+            $url = "https://api.openweathermap.org/data/2.5/weather?q={$city}&appid={$apiKey}&units=metric";
+
+            // Fetch data from API
+            $response = file_get_contents($url);
+            if ($response === FALSE) {
+                die("Error fetching weather data.");
+            }
+
+            $data = json_decode($response, true);
+
+            // Extract details
+            $location = $data['name'] . ", " . $data['sys']['country'];
+            $temp = $data['main']['temp'] . " °C";
+            $condition = ucfirst($data['weather'][0]['description']);
+            ?>
+
+            <div id="weather-container">
+            <h3>🌤️ Current Weather</h3>
+            <p>📍 <?php echo $location; ?></p>
+            <p>🌡️ <?php echo $temp; ?></p>
+            <p>☁️ <?php echo $condition; ?></p>
             </div>
 
             <div class="current-disasters">

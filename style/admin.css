@@ -276,3 +276,15 @@ h2 {
             cursor: pointer;
             transition: background-color 0.2s;
         }
+ .addMem{
+    margin-left: 5px;
+    padding: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    border: solid white 1px;
+    }
+    .addMem:hover {
+    background-color: #3e8e41; /* darker green on hover */
+    transform: scale(1.05);    /* slight zoom effect */
+}

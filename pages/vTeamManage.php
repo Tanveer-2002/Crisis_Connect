@@ -76,7 +76,7 @@
                             <td class="task-item"><?= htmlspecialchars($row['due_date'])?></td>
                             <td>
                                 <form action="taskCompleteProcess.php" method="post">
-                                    <input type="hidden" name="task_id" value="<?= htmlspecialchars($row['task_id'])?>"">
+                                    <input type="hidden" name="task_id" value="<?= htmlspecialchars($row['task_id'])?>">
                                     <button type="submit" class="addMem" name="submit" style="padding: 0px; width:100%; height:50px; margin: 0px">Pending</button></td>
                                 </form>
                             </tr>
